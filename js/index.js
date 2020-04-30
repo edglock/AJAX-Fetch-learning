@@ -56,3 +56,11 @@ function getFetchJson() {
                 .innerText = clientData.account;
         });
 }
+
+const url = 'https://jsonplaceholder.typicode.com/users';
+const xhr = new XMLHttpRequest();
+xhr.onload = () => console.log(xhr.response);
+xhr.onerror = () => console.log(xhr.response);
+xhr.open('GET', url, true);
+// xhr.setRequestHeader(Content-Type, application/json);
+xhr.send();
