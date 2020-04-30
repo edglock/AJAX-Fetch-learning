@@ -57,10 +57,21 @@ function getFetchJson() {
         });
 }
 
-const url = 'https://jsonplaceholder.typicode.com/users';
-const xhr = new XMLHttpRequest();
-xhr.onload = () => console.log(xhr.response);
-xhr.onerror = () => console.log(xhr.response);
-xhr.open('GET', url, true);
-// xhr.setRequestHeader(Content-Type, application/json);
-xhr.send();
+const requestURL = "https://jsonplaceholder.typicode.com/users";
+function sendRequest(method, url) {
+  return new Promise((resolve, reject) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url, true);
+    xhr.responseType = "json";
+    xhr.onload = () => {
+        if ( xhr.status === 200 ) {
+            resolve(xhr.response);
+        } else {
+            reject(xhr.response)
+        }
+    }
+    xhr.send();
+  });
+}
+sendRequest("GET", requestURL).then(data => console.log(data))
+    .catch(err => console.log(err));
